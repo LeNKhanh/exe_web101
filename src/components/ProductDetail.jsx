@@ -34,7 +34,7 @@ export default function ProductDetail() {
         <section class="min-h-screen bg-white pt-24 pb-20">
           <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
             {/* Breadcrumb */}
-            <nav class="reveal flex items-center gap-2 mb-10 text-[12px] text-[#999]">
+            <nav class="reveal visible flex items-center gap-2 mb-10 text-[12px] text-[#999]">
               <A href="/" class="hover:text-[#111] transition-colors">Trang chủ</A>
               <span>/</span>
               <A href="/#products" class="hover:text-[#111] transition-colors">Sản phẩm</A>
@@ -44,7 +44,7 @@ export default function ProductDetail() {
 
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
               {/* Left — Image */}
-              <div class="reveal-left">
+              <div class="reveal-left visible">
                 <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-[#f5f5f5] sticky top-28">
                   <DetailImage src={p().image} alt={p().name} />
                 </div>
@@ -52,7 +52,7 @@ export default function ProductDetail() {
 
               {/* Right — Product info */}
               <div class="flex flex-col">
-                <div class="reveal-right">
+                <div class="reveal-right visible">
                   {/* Tag */}
                   <span class="inline-block bg-[#f7f4ef] text-[#8a7a66] text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-5 border border-[#e8e0d4]">
                     {p().tag}
@@ -94,7 +94,7 @@ export default function ProductDetail() {
                 </div>
 
                 {/* Story section */}
-                <div class="reveal border-t border-[#ebebeb] pt-10">
+                <div class="reveal visible border-t border-[#ebebeb] pt-10">
                   <div class="flex items-center gap-3 mb-6">
                     <div class="w-6 h-[1px] bg-[#ccc]" />
                     <span class="text-[11px] font-bold tracking-[0.2em] uppercase text-[#999]">

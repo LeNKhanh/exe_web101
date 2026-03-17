@@ -1,30 +1,42 @@
 import { onMount, onCleanup } from 'solid-js';
 
+const SELECTORS = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger';
+
 export function useScrollReveal() {
-  let observer;
+  let io;
+  let mo;
 
   onMount(() => {
-    observer = new IntersectionObserver(
+    io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+            io.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
     );
 
-    const selectors = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger';
-
-    // Use requestAnimationFrame to ensure DOM is fully painted before observing
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.querySelectorAll(selectors).forEach((el) => observer.observe(el));
+    function observeNew() {
+      document.querySelectorAll(SELECTORS).forEach((el) => {
+        if (!el.classList.contains('visible')) {
+          io.observe(el);
+        }
       });
-    });
+    }
+
+    // Watch for any new elements added by route navigation
+    mo = new MutationObserver(() => requestAnimationFrame(observeNew));
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Observe elements already in DOM on mount
+    requestAnimationFrame(() => requestAnimationFrame(observeNew));
   });
 
-  onCleanup(() => observer?.disconnect());
+  onCleanup(() => {
+    io?.disconnect();
+    mo?.disconnect();
+  });
 }
