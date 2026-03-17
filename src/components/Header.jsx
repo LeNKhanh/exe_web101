@@ -1,4 +1,5 @@
 import { createSignal, onMount } from 'solid-js';
+import { A } from '@solidjs/router';
 
 export default function Header() {
   const [scrolled, setScrolled] = createSignal(false);
@@ -26,11 +27,11 @@ export default function Header() {
     >
       <div class="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" class="relative z-10">
+        <A href="/" class="relative z-10">
           <span class="font-display text-[22px] font-semibold tracking-[0.01em] text-[#111]">
             Lore<span class="font-light italic">Tote</span>
           </span>
-        </a>
+        </A>
 
         {/* Desktop nav — centered */}
         <nav class="hidden lg:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">

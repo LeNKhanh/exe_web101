@@ -1,4 +1,6 @@
 import { For, createSignal } from 'solid-js';
+import { A } from '@solidjs/router';
+import { products } from '../data/products';
 
 function ProductImage(props) {
   const [failed, setFailed] = createSignal(false);
@@ -23,50 +25,6 @@ function ProductImage(props) {
   );
 }
 
-const products = [
-  {
-    id: 1,
-    name: 'Túi Thốt Nốt Xanh',
-    price: '320.000₫',
-    image: '/images/products/product-1.jpg',
-    tag: 'Bestseller',
-    desc: 'Canvas xanh nhạt — hoạ tiết cây thốt nốt & quả măng cụt truyền thống',
-  },
-  {
-    id: 2,
-    name: 'Túi Thốt Nốt Đen',
-    price: '320.000₫',
-    image: '/images/products/product-2.jpg',
-    tag: 'Classic',
-    desc: 'Canvas đen tuyền — hoạ tiết cây thốt nốt & quả măng cụt',
-  },
-  {
-    id: 3,
-    name: 'Túi Rồng An Giang',
-    price: '350.000₫',
-    image: '/images/products/product-3.png',
-    tag: 'Limited',
-    desc: 'Canvas trắng ngà — hoạ tiết rồng truyền thống sắc màu',
-  },
-  {
-    id: 4,
-    name: 'Túi Cá Sấu Sông Hậu',
-    price: '340.000₫',
-    image: '/images/products/product-4.png',
-    tag: 'New',
-    desc: 'Canvas trắng — hoạ tiết cá sấu vintage cổ điển',
-  },
-  {
-    id: 5,
-    name: 'Túi Cá Sấu Thiên Nhiên',
-    price: '340.000₫',
-    image: '/images/products/product-5.png',
-    tag: 'Popular',
-    desc: 'Canvas trắng — hoạ tiết cá sấu giữa dòng nước xanh',
-    position: '20% 15%',
-  },
-];
-
 export default function Products() {
   return (
     <section id="products" class="py-24 md:py-36 bg-white">
@@ -90,7 +48,7 @@ export default function Products() {
 
         {/* Featured product — hero card */}
         <div class="reveal-scale mb-40 md:mb-56">
-          <div class="product-card group cursor-pointer relative overflow-hidden rounded-3xl bg-[#f7f4ef] border border-[#e8e0d4]">
+          <A href={`/product/${products[0].slug}`} class="product-card group cursor-pointer relative overflow-hidden rounded-3xl bg-[#f7f4ef] border border-[#e8e0d4] block">
             <div class="grid md:grid-cols-2 min-h-[440px] md:min-h-[540px]">
               <div class="relative overflow-hidden">
                 <div class="absolute inset-0">
@@ -110,29 +68,29 @@ export default function Products() {
                 <p class="text-[14px] text-[#6b6358] leading-[1.85] mb-6 max-w-[280px]">{products[0].desc}</p>
                 {/* Material tags */}
                 <div class="flex flex-wrap justify-center gap-2 mb-10">
-                  {['Canvas 12oz', 'In nhiệt HD', 'Chống thấm'].map((tag) => (
+                  {products[0].materials.map((tag) => (
                     <span class="text-[10px] font-medium text-[#8a7a66] border border-[#d8cfc4] px-3 py-1 rounded-full tracking-[0.05em] bg-white/60">{tag}</span>
                   ))}
                 </div>
                 {/* Price */}
                 <span class="font-display text-[2.4rem] font-light text-[#1a1917] leading-none mb-5">{products[0].price}</span>
                 {/* CTA */}
-                <button class="group/btn inline-flex items-center gap-2.5 bg-[#1a1917] text-white px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] rounded-full hover:bg-[#2d2b26] transition-all duration-300 hover:shadow-lg">
-                  Thêm vào giỏ
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover/btn:translate-x-0.5">
-                    <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+                <span class="group/btn inline-flex items-center gap-2.5 bg-[#1a1917] text-white px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] rounded-full group-hover:bg-[#2d2b26] transition-all duration-300 group-hover:shadow-lg">
+                  Xem chi tiết
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                   </svg>
-                </button>
+                </span>
               </div>
             </div>
-          </div>
+          </A>
         </div>
 
         {/* Product grid — 2x2 on desktop */}
         <div class="stagger grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-12 md:gap-x-8 md:gap-y-16">
           <For each={products.slice(1)}>
             {(product, i) => (
-              <div class="product-card group cursor-pointer">
+              <A href={`/product/${product.slug}`} class="product-card group cursor-pointer block">
                 <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-[#f5f5f5] mb-5 relative">
                   <ProductImage src={product.image} alt={product.name} position={product.position} />
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
@@ -141,7 +99,7 @@ export default function Products() {
                   </span>
                   <div class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+                      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                     </svg>
                   </div>
                 </div>
@@ -153,7 +111,7 @@ export default function Products() {
                   <p class="text-[12px] text-[#aaa] mb-2 line-clamp-1">{product.desc}</p>
                   <span class="text-[14px] font-semibold text-[#111]">{product.price}</span>
                 </div>
-              </div>
+              </A>
             )}
           </For>
         </div>

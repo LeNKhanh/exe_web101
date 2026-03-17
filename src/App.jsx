@@ -7,18 +7,26 @@ import Story from './components/Story';
 import Features from './components/Features';
 import Footer from './components/Footer';
 
-export default function App() {
+export function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Marquee />
+      <Products />
+      <Story />
+      <Features />
+    </>
+  );
+}
+
+export default function App(props) {
   useScrollReveal();
 
   return (
     <>
       <Header />
       <main>
-        <Hero />
-        <Marquee />
-        <Products />
-        <Story />
-        <Features />
+        {props.children}
       </main>
       <Footer />
     </>
