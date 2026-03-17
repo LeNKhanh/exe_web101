@@ -72,7 +72,7 @@ export default function ProductDetail() {
                 </div>
 
                 {/* ── 2. Price row ── */}
-                <div class="py-7 border-y border-[#efefef] mb-7">
+                <div class="pt-2 pb-8 border-b border-[#efefef] mb-10">
                   <div class="flex items-end gap-5 flex-wrap">
                     <span class="font-display text-[3.2rem] font-light text-[#1a1917] leading-none tracking-[-0.02em]">
                       {p().price}
@@ -106,15 +106,7 @@ export default function ProductDetail() {
                   </div>
                 </div>
 
-                {/* ── 4. CTA ── */}
-                <button class="group w-full inline-flex items-center justify-center gap-3 bg-[#1a1917] text-white px-10 py-4 text-[11px] font-bold uppercase tracking-[0.18em] rounded-2xl hover:bg-[#2d2b26] transition-all duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] mb-10">
-                  Thêm vào giỏ hàng
-                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
-                    <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </button>
-
-                {/* ── 5. Story ── */}
+                {/* ── 4. Story ── */}
                 <div class="border-t border-[#efefef] pt-8">
                   <div class="flex items-center gap-3 mb-6">
                     <div class="w-5 h-[1px] bg-[#ccc]" />
